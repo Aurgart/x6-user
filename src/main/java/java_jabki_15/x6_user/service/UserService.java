@@ -5,6 +5,7 @@ import java_jabki_15.x6_user.model.User;
 import java_jabki_15.x6_user.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 public class UserService {
     private final UserRepository users;
 
+    @Transactional(rollbackFor = Exception.class)
     public User addUser(User user) {
         validateUser(user);
         users.insert(user);
@@ -41,12 +43,14 @@ public class UserService {
         return users.getById(id);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteUser(final Long id) {
         users.delete(id);
     }
 
-    public void updateUser(User user) {
-        users.update(user);
+    @Transactional(rollbackFor = Exception.class)
+    public User updateUser(User user) {
+        return users.update(user);
     }
 
 }
