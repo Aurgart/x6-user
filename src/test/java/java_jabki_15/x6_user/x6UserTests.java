@@ -29,7 +29,6 @@ public class x6UserTests {
     @Test
     void createUserTest(){
         final User user = testUser();
-        testService.addUser(user);
         Assertions.assertDoesNotThrow(() -> {
             testService.addUser(user);
         });

@@ -1,4 +1,4 @@
-CREATE TABLE x6_user.user
+CREATE TABLE x6_user.x6user
 (
     id serial NOT NULL,
     name varchar NOT NULL,

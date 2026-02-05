@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class UserRepository {
     private static final String INSERT = """
-            INSERT INTO x6_user.user (name,email,birthday,info)
+            INSERT INTO x6_user.user(name,email,birthday,info)
             VALUES (:name, :email, :birthday, :info)
             RETURNING *;
             """;
@@ -57,7 +57,7 @@ public class UserRepository {
         params.addValue("id", user.getId());
         params.addValue("name", user.getName());
         params.addValue("email", user.getEmail());
-        params.addValue("login", user.getInfo());
+        params.addValue("info", user.getInfo());
         params.addValue("birthday", user.getBirthday());
 
         return params;
