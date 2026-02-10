@@ -37,7 +37,7 @@ public class x6UserTests {
                         .id(1)
                         .name("Testyk")
                         .email("test@mk.ru")
-                        .info("Старый пердун")
+                        .info("молодой пацан")
                         .birthday(LocalDate.of(2027, Month.JANUARY, 15))
                         .build()));
         Assertions.assertNotNull(excp.getMessage());
