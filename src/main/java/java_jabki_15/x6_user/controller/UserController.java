@@ -14,30 +14,30 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/user")
 @Tag(name = "Пользователи")
 public class UserController {
-    private final UserService userLogic;
+    private final UserService userService;
 
     @PostMapping
     @Operation(summary = "Создать пользюка")
     public User create(@RequestBody User user) {
-        return userLogic.addUser(user);
+        return userService.addUser(user);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Иди сюда")
-    public User getById(@PathVariable("id") String id) {
-        return userLogic.getbyId(Long.parseLong(id));
+    public User getById(@PathVariable("id") Long id) {
+        return userService.getbyId(id);
     }
 
     @PatchMapping
     @Operation(summary = "Обновление пользователей.")
     public User update(@RequestBody User user) {
-        return userLogic.updateUser(user);
+        return userService.updateUser(user);
     }
 
     @GetMapping("/check/{id}")
     @Operation(summary = "Проверить пользователя")
     public ResponseEntity<ApiStatus> checkById(@PathVariable("id") String id) {
-        User usr = userLogic.getbyId(Long.parseLong(id));
+        User usr = userService.getbyId(Long.parseLong(id));
         if (usr != null) {
             return ResponseEntity.ok().body(new ApiStatus(true, "User " + usr.getName() + " exists!"));
         } else {

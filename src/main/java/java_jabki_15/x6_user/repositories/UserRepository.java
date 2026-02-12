@@ -1,6 +1,6 @@
 package java_jabki_15.x6_user.repositories;
 
-import java_jabki_15.x6_user.mappers.UserMapper;
+import java_jabki_15.x6_user.repositories.mapper.UserMapper;
 import java_jabki_15.x6_user.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -34,24 +34,24 @@ public class UserRepository {
     private final UserMapper userMapp;
     private final NamedParameterJdbcTemplate jbcTemplate;
 
-    public User insert(final User user) {
+    public User insert(User user) {
         return jbcTemplate.queryForObject(INSERT, userParamForSql(user), userMapp);
     }
 
-    public User update(final User user) {
+    public User update(User user) {
         return jbcTemplate.queryForObject(UPDATE, userParamForSql(user), userMapp);
     }
 
-    public void delete(final Long id) {
+    public void delete(Long id) {
         jbcTemplate.update(DELETE, new MapSqlParameterSource("id", id));
     }
 
-    public User getById(final Long id) {
+    public User getById(Long id) {
         return jbcTemplate.queryForObject(GET_BY_ID, new MapSqlParameterSource("id", id), userMapp);
 
     }
 
-    public MapSqlParameterSource userParamForSql(final User user) {
+    public MapSqlParameterSource userParamForSql(User user) {
         final MapSqlParameterSource params = new MapSqlParameterSource();
 
         params.addValue("id", user.getId());

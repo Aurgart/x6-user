@@ -1,4 +1,4 @@
-package java_jabki_15.x6_user.mappers;
+package java_jabki_15.x6_user.repositories.mapper;
 
 import java_jabki_15.x6_user.model.User;
 import org.springframework.jdbc.core.RowMapper;

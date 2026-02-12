@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class UserService {
     private final UserRepository users;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public User addUser(User user) {
         validateUser(user);
         users.insert(user);
@@ -26,16 +26,15 @@ public class UserService {
         if (user == null) {
             throw new UserException("User is null");
         }
-        validateUserData(user.getName(), user.getEmail(), user.getBirthday());
+        validateUserData(user);
     }
 
-    private void validateUserData(String name, String email, LocalDate birthday) {
-
-        if (!StringUtils.hasText(email) || !StringUtils.hasText(name)) {
-            throw new UserException("One of the parameters is empty: name - " + name + " email - " + email);
+    private void validateUserData(User user) {
+        if (!StringUtils.hasText(user.getEmail()) || !StringUtils.hasText(user.getName())) {
+            throw new UserException("One of the parameters is empty: name - " + user.getName() + " email - " + user.getEmail());
         }
-        if (birthday.isAfter(LocalDate.now())) {
-            throw new UserException("Birthday hasn't happend yet - " + birthday);
+        if (user.getBirthday().isAfter(LocalDate.now())) {
+            throw new UserException("Birthday hasn't happend yet - " + user.getBirthday());
         }
     }
 
